@@ -8,7 +8,6 @@ namespace QonaqWebApp.Models.Context
         public IdealContext(DbContextOptions<IdealContext> options)
             : base(options){}
 
-
         public DbSet<AppDetail> AppDetails { get; set; }
         public DbSet<DineInTable> DineInTables { get; set; }
         public DbSet<DineInTableGroup> DineInTableGroups { get; set; }

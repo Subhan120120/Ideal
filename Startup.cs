@@ -80,6 +80,7 @@ namespace QonaqWebApp
             services.AddScoped<IRepository<DineInTableGroup>, DineInTableGroupRepository>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
             services.AddScoped<IRepository<Customer>, CustomerRepository>();
+            services.AddScoped<IRepository<Brand>, BrandRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
