@@ -9,7 +9,9 @@ namespace QonaqWebApp.Models.ViewModel
 {
     public class ProductVM
     {
-        public ProductVM() { }
+        public ProductVM()
+        {
+        }
 
         public ProductVM(List<AppDetail> appDetails)
         {
@@ -22,17 +24,15 @@ namespace QonaqWebApp.Models.ViewModel
             this.Categories = categories;
         }
 
-        public ProductVM(List<AppDetail> appDetails, List<Category> categories, List<Brand> brands)
+        public ProductVM(List<AppDetail> appDetails, List<Category> categories, List<Product> product)
             : this(appDetails, categories)
         {
-            this.Brands = brands;
+            this.Product = product;
         }
 
         public List<AppDetail> AppDetails { get; set; }
         public List<Category> Categories { get; set; }
-        public List<Brand> Brands { get; set; }
-        public string[] BrandIds { get; set; }
-
-
+        public List<Product> Product { get; set; }
+        public int[] CategoryIds { get; set; }
     }
 }

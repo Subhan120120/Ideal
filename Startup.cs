@@ -65,7 +65,7 @@ namespace QonaqWebApp
 
             services.AddRazorPages();
             services.AddDbContext<IdealContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("QonaqDBString")));
+                options.UseSqlServer(Configuration.GetConnectionString("IdealDBString")));
 
             RepositoryDIImplementation(services);
         }
@@ -80,7 +80,6 @@ namespace QonaqWebApp
             services.AddScoped<IRepository<DineInTableGroup>, DineInTableGroupRepository>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
             services.AddScoped<IRepository<Customer>, CustomerRepository>();
-            services.AddScoped<IRepository<Brand>, BrandRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

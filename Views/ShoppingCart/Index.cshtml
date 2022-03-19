@@ -1,5 +1,4 @@
-﻿
-@model ShoppingVM
+﻿@model ShoppingVM
 
 
 
@@ -102,15 +101,12 @@
         </div>
     </div>
 </section>
-
 @section Styles{
     <link href="~/npm/toastr/build/toastr.min.css" rel="stylesheet" />
 }
-
 @section Scripts{
     <script src="~/npm/toastr/build/toastr.min.js"></script>
     <script src="~/js/site.js"></script>  <!--toastra gore-->
-
     @if (TempData.ContainsKey("Success"))
     {
         <script>toastr["success"]("@TempData["Success"]", "Təşəkkürlər!")</script>

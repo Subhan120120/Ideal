@@ -1,5 +1,4 @@
-﻿
-@model ProductVM
+﻿@model ProductVM
 
 <section class="parallax ftco-section" id="ftco-testimony" style="background-image: url('/coffee/images/IMG_9276.jpg'); padding: 15%">
     <div class="overlay"></div>
@@ -27,7 +26,7 @@
                                     asp-items="@Model.Categories" multiple class="form-control"></select>*@
                                 @*@Html.DropDownListFor(x => x.Categories, new SelectList(Model.Categories, "CategoryId", "CategoryName"), htmlAttributes: new { @class = "formcontrol", id = "Subjects_dropdown" })*@
 
-                                @Html.ListBoxFor(m => m.BrandIds, new MultiSelectList(Model.Brands, "BrandId", "BrandName"), new { @class = "form-control", multiple = "multiple", id = "Subjects_dropdown" })
+                                @Html.ListBoxFor(m => m.CategoryIds, new MultiSelectList(Model.Categories, "CategoryId", "CategoryName"), new { @class = "form-control", multiple = "multiple", id = "Subjects_dropdown" })
                             </div>
                         </div>
                     </div>
@@ -65,23 +64,17 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
-
-
 @section Styles{
     <link href="~/coffee/css/bootstrap-multiselect.css" rel="stylesheet" />
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 }
-
-
-
 @section Scripts{
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>*@
     <script src="~/coffee/js/bootstrap-multiselect.js"></script>
+    <script src="~/coffee/js/bootstrap.bundle.js"></script>
     <script>
-
         $(document).ready(function () {
             $('#Subjects_dropdown').multiselect();
         });

@@ -10,8 +10,8 @@ using QonaqWebApp.Models.Context;
 namespace QonaqWebApp.Migrations
 {
     [DbContext(typeof(IdealContext))]
-    [Migration("20220317074704_initial25")]
-    partial class initial25
+    [Migration("20220319080745_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,6 +73,21 @@ namespace QonaqWebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppDetails");
+                });
+
+            modelBuilder.Entity("QonaqWebApp.Models.Entity.Brand", b =>
+                {
+                    b.Property<string>("BrandId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
+
+                    b.HasKey("BrandId");
+
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("QonaqWebApp.Models.Entity.Category", b =>
@@ -204,10 +219,11 @@ namespace QonaqWebApp.Migrations
                     b.Property<string>("ProductId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("BrandId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CategoryId1")
+                    b.Property<string>("CategoryId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ImagePath")
@@ -228,7 +244,9 @@ namespace QonaqWebApp.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -296,9 +314,15 @@ namespace QonaqWebApp.Migrations
 
             modelBuilder.Entity("QonaqWebApp.Models.Entity.Product", b =>
                 {
+                    b.HasOne("QonaqWebApp.Models.Entity.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId");
+
                     b.HasOne("QonaqWebApp.Models.Entity.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId1");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("QonaqWebApp.Models.Entity.Reservation", b =>
