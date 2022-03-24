@@ -80,6 +80,7 @@ namespace QonaqWebApp
             services.AddScoped<IRepository<DineInTableGroup>, DineInTableGroupRepository>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
             services.AddScoped<IRepository<Customer>, CustomerRepository>();
+            services.AddScoped<IRepository<Brand>, BrandRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -119,7 +120,7 @@ namespace QonaqWebApp
                 );
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Menu}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

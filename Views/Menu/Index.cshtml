@@ -22,11 +22,20 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                @*<select id="dropDownList-example" name="SelectedIds"
-                                    asp-items="@Model.Categories" multiple class="form-control"></select>*@
-                                @*@Html.DropDownListFor(x => x.Categories, new SelectList(Model.Categories, "CategoryId", "CategoryName"), htmlAttributes: new { @class = "formcontrol", id = "Subjects_dropdown" })*@
 
-                                @Html.ListBoxFor(m => m.CategoryIds, new MultiSelectList(Model.Categories, "CategoryId", "CategoryName"), new { @class = "form-control", multiple = "multiple", id = "Subjects_dropdown" })
+                                <label class="control-label">Qiymət Aralığı</label>
+                                <div class="input-group">
+                                    <input asp-for="MinValue" class="form-control" />
+                                    <span asp-validation-for="MinValue" class="text-danger"></span>
+
+                                    <input asp-for="MaxValue" class="form-control" />
+                                    <span asp-validation-for="MaxValue" class="text-danger"></span>
+                                </div>
+
+                                <select asp-for="@Model.BrandIds" multiple="multiple" name="BrandIds" id="Subjects_dropdown" class="form-control" asp-items="@(new SelectList(Model.Brands, nameof(Brand.BrandId), nameof(Brand.BrandName)))">
+                                </select>
+
+                                @*@Html.ListBoxFor(m => m.BrandIds, new MultiSelectList(Model.Brands, "BrandId", "BrandName"), new { @class = "form-control", multiple = "multiple", id = "Subjects_dropdown" })*@
                             </div>
                         </div>
                     </div>
@@ -41,22 +50,27 @@
                         {
                             <div class="ftco-animate col-lg-6 col-md-10 col-11 mx-auto" id="@item.ProductId">
                                 <div class="card mb-3">
-                                    <div class="row no-gutters ">
-                                        <div class="item-dishes card-custom col-md-8  img-top overflow-hidden">
-                                            <div class="text">
-                                                <p class="dishes-price">@item.Price &#x20BC</p>
-                                                <h2 class="dishes-heading">@item.ProductName </h2>
-                                            </div>
-                                            @*<img src="../Uploads/Images/@item.ImagePath">*@
+                                    @*<div class="row no-gutters ">*@
+                                    <div class="item-dishes card-custom img-top overflow-hidden">
+                                        <div class="text">
+                                            <p class="dishes-price">@item.Price &#x20BC</p>
+                                            <h2 class="dishes-heading">@item.ProductName </h2>
                                         </div>
-                                        <div class="col-md-4 testimony">
-                                            <div class="card-body outerdiv">
-                                                <h5 class="card-title">@item.ProductDesc </h5>
-                                                <!-- <p class="card-text">@item.ProductDesc</p> -->
+                                        @*<img src="../Uploads/Images/@item.ImagePath">*@
+                                    </div>
+                                    <div class="testimony">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@item.ProductDesc </h5>
+
+                                            <!-- <p class="card-text">@item.ProductDesc</p> -->
+
+                                            <div class="d-flex justify-content-center">
                                                 <a class="btn btn-danger rounded-circle add-to-cart" asp-action="Buy" asp-controller="ShoppingCart" asp-route-id="@item.ProductId"><i class="fa fa-cart-arrow-down"></i> </a>
+                                                <a class="btn btn-danger rounded-circle add-to-cart" asp-action="Detail" asp-controller="Menu" asp-route-code="@item.ProductId"><i class="fa fa-info"></i> </a>
                                             </div>
                                         </div>
                                     </div>
+                                    @*</div>*@
                                 </div>
                             </div>
                         }

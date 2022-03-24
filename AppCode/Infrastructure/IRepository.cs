@@ -23,6 +23,8 @@ namespace QonaqWebApp.AppCode.Infrastructure
         Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null);
 
         T GetById(int id);
+        T GetByCode(string id);
+
         Task<T> GetByIdAsync(int id);
 
         T Update(T entity);

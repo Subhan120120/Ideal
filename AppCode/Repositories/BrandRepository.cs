@@ -69,6 +69,11 @@ namespace QonaqWebApp.AppCode.Repositories
             return await db.Brands.ToListAsync();
         }
 
+        public Brand GetByCode(string id)
+        {
+            return db.Brands.Find(id);
+        }
+
         public Brand GetById(int id)
         {
             return db.Brands.Find(id);

@@ -33,16 +33,16 @@ namespace QonaqWebApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddOrEdit(int id = 0)
+        public IActionResult AddOrEdit(string id = "")
         {
-            ViewBag.Category = new SelectList(categoryRepo.GetAll(), "Id", "CategoryName");
-            if (id == 0)
+            ViewBag.Category = new SelectList(categoryRepo.GetAll(), "CategoryId", "CategoryName");
+            if (id == "")
             {
                 return View(new Product());
             }
             else
             {
-                var product = productRepo.GetById(id);
+                var product = productRepo.GetByCode(id);
                 if (product == null)
                 {
                     return NotFound();
@@ -54,7 +54,7 @@ namespace QonaqWebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult AddOrEdit(int id, Product product, IFormFile ImagePath)
+        public JsonResult AddOrEdit(string id, Product product, IFormFile ImagePath)
         {
             ViewBag.Category = new SelectList(categoryRepo.GetAll(), "Id", "CategoryName");
 
@@ -70,7 +70,7 @@ namespace QonaqWebApp.Areas.Admin.Controllers
                 }
 
 
-                if (id == 0)
+                if (string.IsNullOrEmpty(id))
                 {
                     productRepo.Add(product);
                     productRepo.SaveChanges();
@@ -80,11 +80,11 @@ namespace QonaqWebApp.Areas.Admin.Controllers
                     try
                     {
                         if (ImagePath != null)
-                            productRepo.GetById(id).ImagePath = product.ImagePath;
-                        productRepo.GetById(id).ProductDesc = product.ProductDesc;
-                        productRepo.GetById(id).CategoryId = product.CategoryId;
-                        productRepo.GetById(id).ProductName = product.ProductName;
-                        productRepo.GetById(id).Price = product.Price;
+                            productRepo.GetByCode(id).ImagePath = product.ImagePath;
+                        productRepo.GetByCode(id).ProductDesc = product.ProductDesc;
+                        productRepo.GetByCode(id).CategoryId = product.CategoryId;
+                        productRepo.GetByCode(id).ProductName = product.ProductName;
+                        productRepo.GetByCode(id).Price = product.Price;
                         productRepo.SaveChanges();
                     }
                     catch (DbUpdateConcurrencyException)
@@ -104,11 +104,11 @@ namespace QonaqWebApp.Areas.Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int[] selectRowsArr)
+        public IActionResult DeleteConfirmed(string[] selectRowsArr)
         {
-            foreach (int item in selectRowsArr)
+            foreach (string item in selectRowsArr)
             {
-                Product MenuRow = productRepo.GetById(item);
+                Product MenuRow = productRepo.GetByCode(item);
                 productRepo.Delete(MenuRow);
                 var pathImage = Path.Combine("wwwroot", "Uploads", "Images", MenuRow.ImagePath);
                 if (System.IO.File.Exists(pathImage))

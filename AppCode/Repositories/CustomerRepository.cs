@@ -69,6 +69,11 @@ namespace QonaqWebApp.AppCode.Repositories
             return await db.Customers.ToListAsync();
         }
 
+        public Customer GetByCode(string id)
+        {
+            return db.Customers.Find(id);
+        }
+
         public Customer GetById(int id)
         {
             return db.Customers.Find(id);

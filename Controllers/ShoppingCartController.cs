@@ -45,12 +45,12 @@ namespace QonaqWebApp.Controllers
         [TempData]
         public string Error { get; set; }
 
-        public IActionResult Buy(int id)
+        public IActionResult Buy(string id)
         {
             if (SessionHelper.GetObjectFromJson<List<Order>>(HttpContext.Session, "cart") == null)
             {
                 List<Order> cart = new List<Order>();
-                cart.Add(new Order { Product = productRepo.GetById(id), Quantity = 1 });
+                cart.Add(new Order { Product = productRepo.GetByCode(id), Quantity = 1 });
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
             else
@@ -60,13 +60,13 @@ namespace QonaqWebApp.Controllers
                 if (isExist(id) != -1)
                     cart[index].Quantity++;
                 else
-                    cart.Add(new Order { Product = productRepo.GetById(id), Quantity = 1 });
+                    cart.Add(new Order { Product = productRepo.GetByCode(id), Quantity = 1 });
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
             return NoContent();
         }
 
-        public IActionResult Remove(int id)
+        public IActionResult Remove(string id)
         {
             List<Order> cart = SessionHelper.GetObjectFromJson<List<Order>>(HttpContext.Session, "cart");
             int index = isExist(id);
@@ -75,7 +75,7 @@ namespace QonaqWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        private int isExist(int id)
+        private int isExist(string id)
         {
             List<Order> cart = SessionHelper.GetObjectFromJson<List<Order>>(HttpContext.Session, "cart");
             for (int i = 0; i < cart.Count; i++)
@@ -109,12 +109,11 @@ namespace QonaqWebApp.Controllers
                     if (rowAffected > 0)
                         TempData["Success"] = "Sifariş Qeydə alındı";
                     else
-                        TempData["Error"] = "Sifariş Qeydə alınmadı";
+                        TempData["Error"] = "Sifariş Qeydə alınmadı";  
                 }
                 else
                     TempData["Error"] = "Sifariş üçün heç bir məhsul seçilməyib";
-            }
-
+            }               
             return RedirectToAction("Index");
         }
 

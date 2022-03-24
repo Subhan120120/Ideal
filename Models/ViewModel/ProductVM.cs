@@ -24,15 +24,17 @@ namespace QonaqWebApp.Models.ViewModel
             this.Categories = categories;
         }
 
-        public ProductVM(List<AppDetail> appDetails, List<Category> categories, List<Product> product)
+        public ProductVM(List<AppDetail> appDetails, List<Category> categories, List<Brand> brands)
             : this(appDetails, categories)
         {
-            this.Product = product;
+            this.Brands = brands;
         }
 
         public List<AppDetail> AppDetails { get; set; }
         public List<Category> Categories { get; set; }
-        public List<Product> Product { get; set; }
-        public int[] CategoryIds { get; set; }
+        public List<Brand> Brands { get; set; }
+        public string[] BrandIds { get; set; }
+        public decimal MaxValue { get; set; }
+        public decimal MinValue { get; set; }
     }
 }

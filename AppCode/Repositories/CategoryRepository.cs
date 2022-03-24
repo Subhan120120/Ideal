@@ -68,6 +68,11 @@ namespace QonaqWebApp.AppCode.Repositories
             return await db.Categories.ToListAsync();
         }
 
+        public Category GetByCode(string id)
+        {
+            return db.Categories.Find(id);
+        }
+
         public Category GetById(int id)
         {
             return db.Categories.Find(id);

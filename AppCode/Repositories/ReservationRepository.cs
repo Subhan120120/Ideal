@@ -68,6 +68,11 @@ namespace QonaqWebApp.AppCode.Repositories
             return await db.Reservations.ToListAsync();
         }
 
+        public Reservation GetByCode(string id)
+        {
+            return db.Reservations.Find(id);
+        }
+
         public Reservation GetById(int id)
         {
             return db.Reservations.Find(id);

@@ -68,6 +68,11 @@ namespace QonaqWebApp.AppCode.Repositories
             return await db.DineInTables.ToListAsync();
         }
 
+        public DineInTable GetByCode(string id)
+        {
+            return db.DineInTables.Find(id);
+        }
+
         public DineInTable GetById(int id)
         {
             return db.DineInTables.Find(id);
