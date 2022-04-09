@@ -1,6 +1,6 @@
 ﻿@model Product;
 
-<section class="home-slider owl-carousel">
+@*<section class="home-slider owl-carousel">
     <div class="slider-item" style="background-image:url(images/xbg_3.jpg.pagespeed.ic.vezfjy4tUK.webp)" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -12,7 +12,8 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@
+
 <section class="ftco-section">
     <div class="container">
         <div class="row">
@@ -22,7 +23,7 @@
 
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-                <h3>@Model.Brand.BrandName</h3>
+                <h3>@Model.Brand.BrandName @Model.ProductDesc</h3>
                 <p class="price"><span>@Model.Price &#x20BC</span></p>
                 <p>@Model.ProductDesc</p>
                 <p>

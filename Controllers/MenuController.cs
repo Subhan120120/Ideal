@@ -5,8 +5,6 @@ using QonaqWebApp.AppCode.Infrastructure;
 using QonaqWebApp.Models.Entity;
 using QonaqWebApp.Models.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace QonaqWebApp.Controllers
@@ -44,9 +42,8 @@ namespace QonaqWebApp.Controllers
         public IActionResult Index(ProductVM productVM)
         {
             var filteredProducts = categoryRepo.GetAll()
-                                           .Include(x => x.Products.Where(p => productVM.BrandIds == null ? true : productVM.BrandIds.Contains(p.BrandId) && p.Price >= productVM.MinValue && p.Price <= productVM.MaxValue))
-                                           .Where(x => x.Products.Any()).ToList();
-
+                                               .Include(x => x.Products.Where(p => productVM.BrandIds == null ? true : productVM.BrandIds.Contains(p.BrandId) && p.Price >= productVM.MinValue && p.Price <= productVM.MaxValue))
+                                               .Where(x => x.Products.Any()).ToList();
 
             ProductVM menuVM = new ProductVM(appDetailRepo.GetAll(x => x.Id == 10).ToList()
                                             , filteredProducts

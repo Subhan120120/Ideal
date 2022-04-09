@@ -34,6 +34,18 @@ namespace QonaqWebApp.Models.Entity
         [MaxLength(150, ErrorMessage = "{0} {1} simvoldan artıq ola bilməz.")]
         public string ImagePath { get; set; }
 
+        [DisplayName("Ölkə")]
+        [MaxLength(250, ErrorMessage = "{0} {1} simvoldan artıq ola bilməz.")]
+        public string Country { get; set; }
+
+        [DisplayName("Qaranti")]
+        [MaxLength(250, ErrorMessage = "{0} {1} simvoldan artıq ola bilməz.")]
+        public string Warranty { get; set; }
+
+        [DisplayName("Xüsusiyətlər")]
+        [MaxLength(250, ErrorMessage = "{0} {1} simvoldan artıq ola bilməz.")]
+        public string Specifications { get; set; }
+
         [ForeignKey("Category")]
         [DisplayName("Qurupu")]
         [Required(ErrorMessage = "Boş buraxıla bilməz.")]
